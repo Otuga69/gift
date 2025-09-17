@@ -9,8 +9,7 @@
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap');
 
         :root {
-            --primary: #4557bdff;
-            --secondary: #000000ff;
+            --primary: #000000ff;
             --accent: #f093fb;
             --dark: #1a1a2e;
             --darker: #16213e;
@@ -21,13 +20,35 @@
             --success: #48bb78;
             --error: #f56565;
             --warning: #ed8936;
-            --shadow-sm: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
-            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-            --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.81), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-            --gradient-main: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
-            --gradient-accent: linear-gradient(135deg, var(--accent) 0%, var(--primary) 100%);
-            --gradient-dark: linear-gradient(135deg, var(--dark) 0%, var(--darker) 100%);
+
+            /* RGBA Color Variables */
+            --black-alpha-90: rgba(18, 18, 19, 0.9);
+            --black-alpha-81: rgba(0, 0, 0, 0.81);
+            --black-alpha-80: rgba(0, 0, 0, 0.8);
+            --black-alpha-10: rgba(0, 0, 0, 0.1);
+            --black-alpha-06: rgba(0, 0, 0, 0.06);
+            --black-alpha-05: rgba(0, 0, 0, 0.05);
+            --black-alpha-04: rgba(0, 0, 0, 0.04);
+
+            --white-alpha-60: rgba(255, 255, 255, 0.6);
+            --white-alpha-50: rgba(255, 255, 255, 0.5);
+            --white-alpha-30: rgba(255, 255, 255, 0.3);
+            --white-alpha-20: rgba(255, 255, 255, 0.2);
+            --white-alpha-10: rgba(255, 255, 255, 0.1);
+
+            --header-bg-translucent: rgba(255, 254, 254, 0.47);
+            --border-light-translucent: rgba(136, 135, 135, 0.2);
+            --profile-btn-bg: rgba(84, 152, 190, 0.81);
+            --text-shadow-light: rgba(252, 249, 249, 0.3);
+            --price-color: rgba(5, 155, 0, 1);
+            --dropdown-hover-bg: rgba(102, 126, 234, 0.1);
+            --error-hover-bg: rgba(245, 101, 101, 0.1);
+
+            /* Shadow Variables using RGBA variables */
+            --shadow-sm: 0 1px 3px 0 var(--black-alpha-10), 0 1px 2px 0 var(--black-alpha-06);
+            --shadow-md: 0 4px 6px -1px var(--black-alpha-10), 0 2px 4px -1px var(--black-alpha-06);
+            --shadow-lg: 0 10px 15px -3px var(--black-alpha-10), 0 4px 6px -2px var(--black-alpha-05);
+            --shadow-xl: 0 20px 25px -5px var(--black-alpha-81), 0 10px 10px -5px var(--black-alpha-04);
         }
 
         * {
@@ -52,10 +73,10 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-image: 
-                radial-gradient(circle at 20% 50%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
-                radial-gradient(circle at 80% 20%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
-                radial-gradient(circle at 40% 80%, rgba(255, 255, 255, 0.1) 0%, transparent 50%);
+            background-image:
+                radial-gradient(circle at 20% 50%, var(--white-alpha-10) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, var(--white-alpha-10) 0%, transparent 50%),
+                radial-gradient(circle at 40% 80%, var(--white-alpha-10) 0%, transparent 50%);
             animation: float 20s ease-in-out infinite;
             pointer-events: none;
             z-index: 1;
@@ -69,10 +90,10 @@
         /* Header Styles */
         header {
             position: relative;
-            background: rgba(255, 255, 255, 0.1);
+            background: var(--header-bg-translucent);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            border-bottom: 1px solid var(--border-light-translucent);
             padding: 1rem 2rem;
             z-index: 100;
         }
@@ -88,9 +109,9 @@
         .logo {
             font-size: 1.8rem;
             font-weight: 800;
-            color: var(--white);
+            color: var(--black-alpha-90);
             text-decoration: none;
-            background: var(--gradient-accent);
+            background: var(--black-alpha-81);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
@@ -108,8 +129,8 @@
 
         .auth-btn {
             padding: 0.6rem 1.5rem;
-            border: 2px solid rgba(255, 255, 255, 0.3);
-            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid var(--white-alpha-30);
+            background: var(--white-alpha-10);
             color: var(--white);
             text-decoration: none;
             border-radius: 50px;
@@ -120,14 +141,14 @@
         }
 
         .auth-btn:hover {
-            background: rgba(255, 255, 255, 0.2);
-            border-color: rgba(255, 255, 255, 0.5);
+            background: var(--white-alpha-20);
+            border-color: var(--white-alpha-50);
             transform: translateY(-2px);
             box-shadow: var(--shadow-lg);
         }
 
         .auth-btn.primary {
-            background: var(--gradient-accent);
+            background: var(--black-alpha-81);
             border-color: transparent;
         }
 
@@ -141,9 +162,9 @@
             width: 50px;
             height: 50px;
             border-radius: 50%;
-            background: var(--gradient-accent);
+            background: var(--profile-btn-bg);
             color: var(--white);
-            border: 3px solid rgba(255, 255, 255, 0.3);
+            border: 3px solid var(--white-alpha-30);
             font-weight: 700;
             font-size: 1.1rem;
             cursor: pointer;
@@ -168,7 +189,7 @@
         .profile-btn:hover {
             transform: scale(1.1);
             box-shadow: var(--shadow-xl);
-            border-color: rgba(255, 255, 255, 0.6);
+            border-color: var(--white-alpha-60);
         }
 
         .profile-btn:hover::before {
@@ -194,7 +215,7 @@
             visibility: hidden;
             transform: translateY(-10px) scale(0.95);
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            border: 1px solid var(--white-alpha-20);
             backdrop-filter: blur(20px);
         }
 
@@ -218,26 +239,26 @@
         }
 
         .dropdown-item:hover {
-            background: rgba(102, 126, 234, 0.1);
+            background: var(--dropdown-hover-bg);
             color: var(--primary);
             transform: translateX(4px);
         }
 
         .dropdown-item.logout {
             color: var(--error);
-            border-top: 1px solid rgba(0, 0, 0, 0.1);
+            border-top: 1px solid var(--black-alpha-10);
             margin-top: 0.5rem;
         }
 
         .dropdown-item.logout:hover {
-            background: rgba(245, 101, 101, 0.1);
+            background: var(--error-hover-bg);
         }
 
         /* Main Content */
         main {
             position: relative;
             z-index: 10;
-            padding: 4rem 2rem 2rem;
+            padding: 2rem 2rem 4rem;
             max-width: 1400px;
             margin: 0 auto;
         }
@@ -250,15 +271,179 @@
         .main-title h1 {
             font-size: 3.5rem;
             font-weight: 800;
-            color: var(--white);
+            color: var(--black-alpha-90);
             margin-bottom: 1rem;
-            text-shadow: 0 4px 20px rgba(252, 249, 249, 0.3);
+            text-shadow: 0 4px 20px var(--text-shadow-light);
         }
 
         .main-title p {
             font-size: 1.2rem;
-            color: rgba(0, 0, 0, 0.8);
+            color: var(--black-alpha-80);
             font-weight: 400;
+        }
+        
+        .section-title {
+            max-width: 1200px;
+            margin: 4rem auto 1.5rem auto;
+            padding: 0 1rem 0.5rem 1rem;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .section-title h2 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        /* Featured Slider Section */
+        .featured-slider {
+            position: relative;
+            max-width: 1200px;
+            margin: 0 auto;
+            overflow: hidden;
+            border-radius: 20px;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .slider__wrapper {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+        }
+
+        .slider__slide {
+            flex: 0 0 100%;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .slider__slide .featured-card {
+            width: 100%;
+            height: 100%;
+            border-radius: 0;
+            box-shadow: none;
+        }
+
+        .slider__button {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(0, 0, 0, 0.4);
+            color: white;
+            border: none;
+            cursor: pointer;
+            z-index: 10;
+            font-size: 1.5rem;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background-color 0.2s ease, opacity 0.3s ease;
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .featured-slider:hover .slider__button {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .slider__button:hover {
+            background-color: rgba(0, 0, 0, 0.7);
+        }
+
+        .slider__button--prev {
+            left: 1rem;
+        }
+
+        .slider__button--next {
+            right: 1rem;
+        }
+
+        .featured-card {
+            position: relative;
+            overflow: hidden;
+            background-color: var(--darker);
+            color: var(--white);
+        }
+
+        .featured-card a {
+            display: block;
+            width: 100%;
+            height: 100%;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .featured-card__image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 1;
+            transition: transform 0.4s ease;
+        }
+
+        .featured-card:hover .featured-card__image {
+            transform: scale(1.1);
+        }
+
+        .featured-card__content {
+            position: relative;
+            z-index: 2;
+            padding: 2.5rem;
+            background: linear-gradient(90deg, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.7) 40%, rgba(0,0,0,0.1) 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            align-items: flex-start;
+            height: 100%;
+            gap: 0.75rem;
+        }
+
+        .featured-card__info {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+        }
+
+        .featured-card__title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            text-shadow: 0 2px 8px rgba(0,0,0,0.8);
+            margin-bottom: 0.5rem;
+            line-height: 1.1;
+        }
+
+        .featured-card__subtitle {
+            font-size: 1.1rem;
+            font-weight: 400;
+            text-shadow: 0 1px 4px rgba(0,0,0,0.8);
+            max-width: 90%;
+            margin-bottom: 1.5rem;
+        }
+
+        .featured-card__price {
+            font-size: 1.75rem;
+            font-weight: 700;
+            padding: 0.6rem 1.2rem;
+            background-color: var(--success);
+            color: var(--white);
+            border-radius: 8px;
+            display: inline-block;
+            box-shadow: var(--shadow-md);
+        }
+
+        .featured-card--banner {
+            aspect-ratio: 16 / 7;
+        }
+
+        .featured-card--custom {
+            aspect-ratio: 4 / 3;
         }
 
         /* Gift Card Grid */
@@ -266,7 +451,6 @@
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 1.5rem;
-            margin-top: 3rem;
             max-width: 1200px;
             margin-left: auto;
             margin-right: auto;
@@ -279,40 +463,35 @@
             box-shadow: var(--shadow-lg);
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             position: relative;
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            border: 1px solid var(--white-alpha-20);
             max-width: 350px;
             margin: 0 auto;
-        }
-
-        .gift-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: var(--gradient-main);
-            opacity: 0;
-            transition: opacity 0.3s ease;
-            border-radius: 20px;
         }
 
         .gift-card:hover {
             transform: translateY(-10px) scale(1.02);
             box-shadow: var(--shadow-xl);
         }
-
-        .gift-card:hover::before {
-            opacity: 0.05;
-        }
-
+        
         .card-image {
             width: 100%;
-            height: 320px;
             object-fit: cover;
+            display: block;
             position: relative;
             z-index: 2;
+            background-color: #f0f0f0;
         }
+        
+        /* High Value Cards (Square) */
+        .gift-card-grid.high-value .card-image {
+            aspect-ratio: 2 / 1;
+        }
+
+        /* Regular Gift Cards (Portrait) */
+        .gift-card-grid.regular .card-image {
+            aspect-ratio: 3 / 4;
+        }
+
 
         .card-content {
             padding: 1.25rem;
@@ -323,14 +502,14 @@
         .card-title {
             font-size: 1.3rem;
             font-weight: 700;
-            color: var(--text-primary);
+            color: var(--black-alpha-90);
             margin-bottom: 0.5rem;
         }
 
         .card-price {
             font-size: 2rem;
             font-weight: 800;
-            background: var(--gradient-main);
+            background: var(--price-color);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
@@ -340,7 +519,7 @@
         .buy-btn {
             width: 100%;
             padding: 1rem;
-            background: rgba(18, 18, 19, 0.9);
+            background: var(--black-alpha-90);
             color: var(--white);
             border: none;
             border-radius: 12px;
@@ -358,6 +537,7 @@
 
         /* Loading Animation */
         .loading {
+            grid-column: 1 / -1;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -367,7 +547,7 @@
         .spinner {
             width: 40px;
             height: 40px;
-            border: 4px solid rgba(255, 255, 255, 0.3);
+            border: 4px solid var(--white-alpha-30);
             border-left-color: var(--white);
             border-radius: 50%;
             animation: spin 1s linear infinite;
@@ -378,20 +558,48 @@
         }
 
         /* Responsive Design */
+        @media (max-width: 992px) {
+            .featured-card__title {
+                font-size: 2rem;
+            }
+            .featured-card__price {
+                font-size: 1.5rem;
+            }
+        }
+
+
         @media (max-width: 768px) {
             .header-content {
                 padding: 0 1rem;
             }
-            
+
             .main-title h1 {
                 font-size: 2.5rem;
             }
-            
+
+            .featured-card--banner {
+                aspect-ratio: 16 / 9;
+            }
+
+            .featured-card__content {
+                padding: 1.5rem;
+                background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.6) 50%, transparent 100%);
+            }
+            .featured-card__title {
+                font-size: 1.8rem;
+            }
+            .featured-card__subtitle {
+                font-size: 1rem;
+                margin-bottom: 1rem;
+            }
+            .featured-card__price {
+                font-size: 1.25rem;
+            }
+
             .gift-card-grid {
                 grid-template-columns: 1fr;
-                gap: 1.5rem;
             }
-            
+
             main {
                 padding: 2rem 1rem;
             }
@@ -407,13 +615,13 @@
     <header>
         <div class="header-content">
             <a href="#" class="logo">GiftStore</a>
-            
+
             <div class="profile-section">
                 <div id="auth-buttons" class="auth-buttons hidden">
                     <a href="login.html" class="auth-btn">Login</a>
                     <a href="login.html" class="auth-btn primary">Sign Up</a>
                 </div>
-                
+
                 <div id="profile-container" class="hidden">
                     <button id="profile-btn" class="profile-btn">
                         <span id="profile-initial">U</span>
@@ -440,7 +648,25 @@
             <p>Discover amazing gift cards for your loved ones</p>
         </div>
 
-        <div id="gift-card-grid" class="gift-card-grid">
+        <div id="featured-slider" class="featured-slider">
+             <div class="loading">
+                <div class="spinner"></div>
+            </div>
+        </div>
+
+        <div class="section-title">
+            <h2>High Value Cards</h2>
+        </div>
+        <div id="high-value-grid" class="gift-card-grid high-value">
+            <div class="loading">
+                <div class="spinner"></div>
+            </div>
+        </div>
+
+        <div class="section-title">
+            <h2>All Gift Cards</h2>
+        </div>
+        <div id="gift-card-grid" class="gift-card-grid regular">
             <div class="loading">
                 <div class="spinner"></div>
             </div>
@@ -459,22 +685,75 @@
         const profileDropdown = document.getElementById('profile-dropdown');
         const profileInitial = document.getElementById('profile-initial');
         const logoutBtn = document.getElementById('logout-btn');
+        const highValueGrid = document.getElementById('high-value-grid');
         const giftCardGrid = document.getElementById('gift-card-grid');
+
+        // --- Slider Variables ---
+        let slideInterval;
+        let currentSlide = 0;
+
+        // --- Slider Functions ---
+        function showSlide(slider, index) {
+            const wrapper = slider.querySelector('.slider__wrapper');
+            const slides = slider.querySelectorAll('.slider__slide');
+            if (!wrapper || !slides || slides.length === 0) return;
+
+            if (index >= slides.length) currentSlide = 0;
+            else if (index < 0) currentSlide = slides.length - 1;
+            else currentSlide = index;
+
+            const offset = -currentSlide * 100;
+            wrapper.style.transform = `translateX(${offset}%)`;
+        }
+
+        function initSlider() {
+            const slider = document.getElementById('featured-slider');
+            if (!slider) return;
+
+            const slides = slider.querySelectorAll('.slider__slide');
+            if (slides.length <= 1) {
+                const prevBtn = slider.querySelector('.slider__button--prev');
+                const nextBtn = slider.querySelector('.slider__button--next');
+                if(prevBtn) prevBtn.remove();
+                if(nextBtn) nextBtn.remove();
+                return;
+            }
+
+            slider.insertAdjacentHTML('beforeend', `
+                <button class="slider__button slider__button--prev">&#10094;</button>
+                <button class="slider__button slider__button--next">&#10095;</button>
+            `);
+
+            const prevBtn = slider.querySelector('.slider__button--prev');
+            const nextBtn = slider.querySelector('.slider__button--next');
+
+            const resetInterval = () => {
+                clearInterval(slideInterval);
+                slideInterval = setInterval(() => showSlide(slider, currentSlide + 1), 5000);
+            };
+
+            prevBtn.addEventListener('click', () => {
+                showSlide(slider, currentSlide - 1);
+                resetInterval();
+            });
+
+            nextBtn.addEventListener('click', () => {
+                showSlide(slider, currentSlide + 1);
+                resetInterval();
+            });
+
+            slideInterval = setInterval(() => showSlide(slider, currentSlide + 1), 5000);
+        }
 
         // Check authentication status
         function checkAuthStatus() {
             if (pb.authStore.isValid && pb.authStore.model) {
-                // User is logged in
                 authButtons.classList.add('hidden');
                 profileContainer.classList.remove('hidden');
-                
-                // Set profile initial
                 const user = pb.authStore.model;
                 profileInitial.textContent = user.email.charAt(0).toUpperCase();
-                
                 return true;
             } else {
-                // User is not logged in
                 authButtons.classList.remove('hidden');
                 profileContainer.classList.add('hidden');
                 return false;
@@ -488,7 +767,7 @@
 
         // Close dropdown when clicking outside
         document.addEventListener('click', (e) => {
-            if (!profileContainer.contains(e.target)) {
+            if (profileContainer && !profileContainer.contains(e.target)) {
                 profileDropdown.classList.remove('show');
             }
         });
@@ -499,53 +778,142 @@
             window.location.href = 'login.html';
         }
 
-        // Load gift cards
-        async function loadGiftCards() {
+        // Load featured cards
+        async function loadStaticCards() {
+            const sliderContainer = document.getElementById('featured-slider');
+            if (!sliderContainer) return;
+
             try {
-                const records = await pb.collection('content').getFullList({
-                    sort: '-created',
+                const records = await pb.collection('static_cards').getFullList({ sort: '-created' });
+
+                if (records.length === 0) {
+                    sliderContainer.style.display = 'none';
+                    return;
+                }
+
+                sliderContainer.innerHTML = '<div class="slider__wrapper"></div>';
+                const sliderWrapper = sliderContainer.querySelector('.slider__wrapper');
+
+                records.forEach(card => {
+                    const slideElement = document.createElement('div');
+                    slideElement.className = 'slider__slide';
+
+                    const cardElement = document.createElement('div');
+                    cardElement.className = 'featured-card';
+
+                    if (card.display_type === 'banner') cardElement.classList.add('featured-card--banner');
+                    else if (card.display_type === 'custom') cardElement.classList.add('featured-card--custom');
+
+                    const imageUrl = card.image ? pb.getFileUrl(card, card.image) : 'https://via.placeholder.com/1600x700?text=Featured+Promotion';
+                    const title = card.title || 'Special Offer';
+                    const subtitleHTML = card.subtitle ? `<p class="featured-card__subtitle">${card.subtitle}</p>` : '';
+                    const price = card.price_display || card.price || '';
+                    const priceHTML = price ? `<div class="featured-card__price">${price}</div>` : '';
+
+                    cardElement.innerHTML = `
+                        <a href="${card.link || '#'}">
+                            <img src="${imageUrl}" alt="${title}" class="featured-card__image" onerror="this.style.display='none'">
+                            <div class="featured-card__content">
+                                <div class="featured-card__info">
+                                    <h2 class="featured-card__title">${title}</h2>
+                                    ${subtitleHTML}
+                                </div>
+                                ${priceHTML}
+                            </div>
+                        </a>
+                    `;
+                    slideElement.appendChild(cardElement);
+                    sliderWrapper.appendChild(slideElement);
                 });
 
-                giftCardGrid.innerHTML = '';
-                
+                initSlider();
+
+            } catch (error) {
+                console.error('Failed to load featured cards:', error);
+                sliderContainer.innerHTML = '<p style="color: var(--text-secondary); text-align: center;">Failed to load featured content.</p>';
+            }
+        }
+        
+        // Load High Value cards
+        async function loadHighValueCards() {
+            if (!highValueGrid) return;
+            try {
+                const records = await pb.collection('highvalecards').getFullList({ sort: '-created' });
+
+                highValueGrid.innerHTML = '';
+                const titleElement = highValueGrid.previousElementSibling;
+
                 if (records.length === 0) {
-                    giftCardGrid.innerHTML = '<p style="color: white; text-align: center; grid-column: 1/-1;">No gift cards available.</p>';
+                    if (titleElement && titleElement.classList.contains('section-title')) {
+                        titleElement.style.display = 'none';
+                    }
+                    highValueGrid.style.display = 'none';
                     return;
                 }
 
                 records.forEach(card => {
                     const cardElement = document.createElement('div');
                     cardElement.classList.add('gift-card');
-                    
-                    const imageUrl = card.image ? pb.getFileUrl(card, card.image) : 'https://via.placeholder.com/320x220?text=Gift+Card';
-
+                    const imageUrl = card.image ? pb.getFileUrl(card, card.image) : 'https://via.placeholder.com/300x300?text=High+Value';
                     cardElement.innerHTML = `
-                        <img src="${imageUrl}" alt="${card.giftname}" class="card-image" onerror="this.src='https://via.placeholder.com/320x220/667eea/ffffff?text=Gift+Card'">
+                        <img src="${imageUrl}" alt="${card.giftname || 'Gift Card'}" class="card-image" onerror="this.src='https://via.placeholder.com/300x300/4a5568/ffffff?text=Error'">
                         <div class="card-content">
-                            <h3 class="card-title">${card.giftname}</h3>
-                            <div class="card-price">${card.price}</div>
-                            <button class="buy-btn" onclick="handlePurchase('${card.id}', '${card.giftname}', ${card.price})">Buy Now</button>
+                            <h3 class="card-title">${card.giftname || 'Gift Card'}</h3>
+                            <div class="card-price">${card.price || ''}</div>
+                            <button class="buy-btn" onclick="handlePurchase('${card.id}', '${card.giftname}', '${card.price}')">Buy Now</button>
                         </div>
                     `;
-                    
+                    highValueGrid.appendChild(cardElement);
+                });
+            } catch (error) {
+                console.error('Failed to load high value cards:', error);
+                highValueGrid.innerHTML = '<p style="color: var(--text-secondary); text-align: center; grid-column: 1/-1;">Failed to load cards.</p>';
+            }
+        }
+
+        // Load regular gift cards
+        async function loadGiftCards() {
+            try {
+                const records = await pb.collection('content').getFullList({ sort: '-created' });
+
+                giftCardGrid.innerHTML = '';
+                const titleElement = giftCardGrid.previousElementSibling;
+
+                if (records.length === 0) {
+                     if (titleElement && titleElement.classList.contains('section-title')) {
+                        titleElement.style.display = 'none';
+                    }
+                    giftCardGrid.innerHTML = '<p style="color: var(--text-secondary); text-align: center; grid-column: 1/-1;">No gift cards available.</p>';
+                    return;
+                }
+
+                records.forEach(card => {
+                    const cardElement = document.createElement('div');
+                    cardElement.classList.add('gift-card');
+                    const imageUrl = card.image ? pb.getFileUrl(card, card.image) : 'https://via.placeholder.com/320x426?text=Gift+Card';
+                    cardElement.innerHTML = `
+                        <img src="${imageUrl}" alt="${card.giftname}" class="card-image" onerror="this.src='https://via.placeholder.com/320x426/667eea/ffffff?text=Gift+Card'">
+                        <div class="card-content">
+                            <h3 class="card-title">${card.giftname || 'Gift Card'}</h3>
+                            <div class="card-price">${card.price || ''}</div>
+                            <button class="buy-btn" onclick="handlePurchase('${card.id}', '${card.giftname}', '${card.price}')">Buy Now</button>
+                        </div>
+                    `;
                     giftCardGrid.appendChild(cardElement);
                 });
 
             } catch (error) {
                 console.error('Failed to load gift cards:', error);
-                giftCardGrid.innerHTML = '<p style="color: white; text-align: center; grid-column: 1/-1;">Failed to load gift cards.</p>';
+                giftCardGrid.innerHTML = '<p style="color: var(--text-secondary); text-align: center; grid-column: 1/-1;">Failed to load gift cards.</p>';
             }
         }
 
         // Handle gift card purchase
         function handlePurchase(cardId, cardName, price) {
             if (!pb.authStore.isValid) {
-                // Redirect to login if not authenticated
                 window.location.href = 'login.html';
                 return;
             }
-            
-            // For now, just show an alert - you can implement actual purchase logic later
             alert(`Purchase ${cardName} for ${price}?\n\nThis would integrate with a payment system.`);
         }
 
@@ -556,10 +924,10 @@
         // Initialize
         document.addEventListener('DOMContentLoaded', () => {
             checkAuthStatus();
+            loadStaticCards();
+            loadHighValueCards();
             loadGiftCards();
         });
     </script>
 </body>
 </html>
-
-
