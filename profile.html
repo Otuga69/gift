@@ -9,27 +9,28 @@
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap');
 
         :root {
-            --primary: #667eea;
-            --secondary: #764ba2;
-            --accent: #f093fb;
-            --dark: #1a1a2e;
-            --darker: #16213e;
-            --light: #eee;
-            --white: #ffffff;
-            --text-primary: #2d3748;
-            --text-secondary: #718096;
-            --success: #48bb78;
-            --error: #f56565;
-            --warning: #ed8936;
-            --shadow-sm: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
-            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-            --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-            --gradient-main: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
-            --gradient-accent: linear-gradient(135deg, var(--accent) 0%, var(--primary) 100%);
-            --gradient-dark: linear-gradient(135deg, var(--dark) 0%, var(--darker) 100%);
-        }
-
+    --primary: #8B7355;
+    --secondary: #A0916B;
+    --accent: #D4C4A8;
+    --dark: #6B5B47;
+    --darker: #5A4A38;
+    --light: #F5F5DC;
+    --white: #FEFEFE;
+    --cream: #FFF8DC;
+    --cream-dark: #F5EBDC;
+    --text-primary: #4A3C28;
+    --text-secondary: #6B5B47;
+    --success: #8FBC8F;
+    --error: #CD8C95;
+    --warning: #D2B48C;
+    --shadow-sm: 0 1px 3px 0 rgba(139, 115, 85, 0.1), 0 1px 2px 0 rgba(139, 115, 85, 0.06);
+    --shadow-md: 0 4px 6px -1px rgba(139, 115, 85, 0.1), 0 2px 4px -1px rgba(139, 115, 85, 0.06);
+    --shadow-lg: 0 10px 15px -3px rgba(139, 115, 85, 0.1), 0 4px 6px -2px rgba(139, 115, 85, 0.05);
+    --shadow-xl: 0 20px 25px -5px rgba(139, 115, 85, 0.1), 0 10px 10px -5px rgba(139, 115, 85, 0.04);
+    --gradient-main: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+    --gradient-accent: linear-gradient(135deg, var(--accent) 0%, var(--primary) 100%);
+    --gradient-dark: linear-gradient(135deg, var(--dark) 0%, var(--darker) 100%);
+}
         * {
             margin: 0;
             padding: 0;
@@ -37,29 +38,28 @@
         }
 
         body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            color: var(--text-primary);
-            overflow-x: hidden;
-        }
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: linear-gradient(135deg, var(--cream) 0%, var(--cream-dark) 100%);
+    min-height: 100vh;
+    color: var(--text-primary);
+    overflow-x: hidden;
+}
 
-        /* Animated background particles */
         body::before {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: 
-                radial-gradient(circle at 20% 50%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
-                radial-gradient(circle at 80% 20%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
-                radial-gradient(circle at 40% 80%, rgba(255, 255, 255, 0.1) 0%, transparent 50%);
-            animation: float 20s ease-in-out infinite;
-            pointer-events: none;
-            z-index: 1;
-        }
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: 
+        radial-gradient(circle at 20% 50%, rgba(139, 115, 85, 0.05) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(160, 145, 107, 0.05) 0%, transparent 50%),
+        radial-gradient(circle at 40% 80%, rgba(212, 196, 168, 0.05) 0%, transparent 50%);
+    animation: float 20s ease-in-out infinite;
+    pointer-events: none;
+    z-index: 1;
+}
 
         @keyframes float {
             0%, 100% { transform: translateY(0px); }
@@ -611,3 +611,4 @@
     </script>
 </body>
 </html>
+
