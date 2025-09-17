@@ -3,21 +3,32 @@
 
 /* Define a modern color palette and variables */
 :root {
-    --primary-color: #6a11cb;
-    --secondary-color: #2575fc;
-    --background-color: #f4f7fc;
-    --surface-color: #ffffff;
-    --text-color: #333;
-    --shadow-color: rgba(0, 0, 0, 0.1);
-    --shadow-hover-color: rgba(0, 0, 0, 0.2);
+    --primary: #667eea;
+    --secondary: #764ba2;
+    --accent: #f093fb;
+    --dark: #1a1a2e;
+    --darker: #16213e;
+    --light: #eee;
+    --white: #ffffff;
+    --text-primary: #000000; /* Updated to black */
+    --text-secondary: #718096;
+    --success: #48bb78;
+    --error: #f56565;
+    --warning: #ed8936;
+    --shadow-sm: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    --gradient-main: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+    --gradient-accent: linear-gradient(135deg, var(--accent) 0%, var(--primary) 100%);
+    --gradient-dark: linear-gradient(135deg, var(--dark) 0%, var(--darker) 100%);
     --border-radius: 12px;
 }
 
 body {
     font-family: 'Poppins', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     margin: 0;
-    background-color: var(--background-color);
-    color: var(--text-color);
+    color: var(--text-primary);
 }
 
 /* --- Login/Signup Page Styles --- */
@@ -29,10 +40,9 @@ body {
 }
 
 .auth-form-container {
-    background: var(--surface-color);
     padding: 2.5rem;
     border-radius: var(--border-radius);
-    box-shadow: 0 10px 25px var(--shadow-color);
+    box-shadow: 0 10px 25px var(--shadow-sm);
     width: 100%;
     max-width: 400px;
 }
@@ -41,13 +51,12 @@ body {
 /* --- Main Store Page Styles --- */
 
 header {
-    background: linear-gradient(90deg, var(--primary-color) 0%, var(--secondary-color) 100%);
     padding: 1rem 2rem;
-    box-shadow: 0 4px 12px var(--shadow-color);
+    box-shadow: 0 4px 12px var(--shadow-sm);
     display: flex;
     justify-content: space-between;
     align-items: center;
-    color: white;
+    color: var(--text-primary);
 }
 
 header .logo {
@@ -59,10 +68,10 @@ header .logo {
     position: relative;
 }
 
-#profile-btn {
-    background: rgba(255, 255, 255, 0.2);
-    color: white;
-    border: 1px solid white;
+#profile-btn, .buy-btn, #logout-btn {
+    background-color: #000000;
+    color: var(--white);
+    border: 1px solid #000000;
     padding: 0.6rem 1.2rem;
     border-radius: 8px;
     cursor: pointer;
@@ -70,22 +79,21 @@ header .logo {
     transition: background-color 0.3s ease;
 }
 
-#profile-btn:hover {
-    background: rgba(255, 255, 255, 0.3);
+#profile-btn:hover, .buy-btn:hover, #logout-btn:hover {
+    background-color: #333333;
 }
 
 #profile-details {
     position: absolute;
     top: 120%;
     right: 0;
-    background: var(--surface-color);
     padding: 1rem;
     border-radius: var(--border-radius);
-    box-shadow: 0 8px 20px var(--shadow-hover-color);
+    box-shadow: 0 8px 20px var(--shadow-lg);
     width: 280px;
     z-index: 100;
     border: 1px solid #eee;
-    color: var(--text-color);
+    color: var(--text-primary);
 }
 
 main {
@@ -99,7 +107,7 @@ main h1 {
     margin-bottom: 2.5rem;
     font-size: 2.5rem;
     font-weight: 700;
-    color: var(--primary-color);
+    color: var(--primary);
 }
 
 /* Gift Card Grid */
@@ -110,16 +118,15 @@ main h1 {
 }
 
 .card {
-    background: var(--surface-color);
     border-radius: var(--border-radius);
-    box-shadow: 0 4px 15px var(--shadow-color);
+    box-shadow: 0 4px 15px var(--shadow-sm);
     overflow: hidden;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .card:hover {
     transform: translateY(-10px);
-    box-shadow: 0 12px 28px var(--shadow-hover-color);
+    box-shadow: 0 12px 28px var(--shadow-lg);
 }
 
 .card img {
@@ -141,36 +148,8 @@ main h1 {
 .card-content .price {
     font-size: 1.5rem;
     font-weight: 700;
-    color: var(--primary-color);
+    color: var(--primary);
     margin-bottom: 1rem;
-}
-
-.buy-btn {
-    width: 100%;
-    padding: 0.75rem;
-    background: linear-gradient(90deg, var(--primary-color) 0%, var(--secondary-color) 100%);
-    color: white;
-    border: none;
-    border-radius: 8px;
-    font-size: 1rem;
-    font-weight: 600;
-    cursor: pointer;
-    transition: opacity 0.3s ease;
-}
-
-.buy-btn:hover {
-    opacity: 0.9;
-}
-
-#logout-btn {
-    width: 100%;
-    padding: 0.5rem;
-    margin-top: 1rem;
-    background-color: #dc3545;
-    color: white;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
 }
 
 .hidden {
