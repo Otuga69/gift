@@ -1,4 +1,5 @@
-<!DOCTYPE html>
+.card-title {
+            font-s<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -264,9 +265,12 @@
         /* Gift Card Grid */
         .gift-card-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 2rem;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
             margin-top: 3rem;
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
         }
 
         .gift-card {
@@ -277,6 +281,8 @@
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             position: relative;
             border: 1px solid rgba(255, 255, 255, 0.2);
+            max-width: 350px;
+            margin: 0 auto;
         }
 
         .gift-card::before {
@@ -303,14 +309,14 @@
 
         .card-image {
             width: 100%;
-            height: 220px;
+            height: 180px;
             object-fit: cover;
             position: relative;
             z-index: 2;
         }
 
         .card-content {
-            padding: 1.5rem;
+            padding: 1.25rem;
             position: relative;
             z-index: 2;
         }
@@ -493,7 +499,7 @@
         // Handle logout
         function handleLogout() {
             pb.authStore.clear();
-            window.location.reload();
+            window.location.href = 'login.html';
         }
 
         // Load gift cards
@@ -517,11 +523,11 @@
                     const imageUrl = card.image ? pb.getFileUrl(card, card.image) : 'https://via.placeholder.com/320x220?text=Gift+Card';
 
                     cardElement.innerHTML = `
-                        <img src="${imageUrl}" alt="${card.giftname}" class="card-image">
+                        <img src="${imageUrl}" alt="${card.giftname}" class="card-image" onerror="this.src='https://via.placeholder.com/320x220/667eea/ffffff?text=Gift+Card'">
                         <div class="card-content">
                             <h3 class="card-title">${card.giftname}</h3>
-                            <div class="card-price">$${card.price}</div>
-                            <button class="buy-btn">Buy Now</button>
+                            <div class="card-price">${card.price}</div>
+                            <button class="buy-btn" onclick="handlePurchase('${card.id}', '${card.giftname}', ${card.price})">Buy Now</button>
                         </div>
                     `;
                     
@@ -532,6 +538,18 @@
                 console.error('Failed to load gift cards:', error);
                 giftCardGrid.innerHTML = '<p style="color: white; text-align: center; grid-column: 1/-1;">Failed to load gift cards.</p>';
             }
+        }
+
+        // Handle gift card purchase
+        function handlePurchase(cardId, cardName, price) {
+            if (!pb.authStore.isValid) {
+                // Redirect to login if not authenticated
+                window.location.href = 'login.html';
+                return;
+            }
+            
+            // For now, just show an alert - you can implement actual purchase logic later
+            alert(`Purchase ${cardName} for ${price}?\n\nThis would integrate with a payment system.`);
         }
 
         // Event listeners
