@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gift Card Store</title>
+    <title>Profile - Gift Card Store</title>
     <style>
         /* Import modern fonts */
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap');
@@ -96,17 +96,14 @@
             background-clip: text;
         }
 
-        /* Profile Section */
-        .profile-section {
-            position: relative;
-        }
-
-        .auth-buttons {
+        /* Navigation */
+        .nav-links {
             display: flex;
             gap: 1rem;
+            align-items: center;
         }
 
-        .auth-btn {
+        .nav-btn {
             padding: 0.6rem 1.5rem;
             border: 2px solid rgba(255, 255, 255, 0.3);
             background: rgba(255, 255, 255, 0.1);
@@ -119,167 +116,101 @@
             backdrop-filter: blur(10px);
         }
 
-        .auth-btn:hover {
+        .nav-btn:hover {
             background: rgba(255, 255, 255, 0.2);
             border-color: rgba(255, 255, 255, 0.5);
             transform: translateY(-2px);
             box-shadow: var(--shadow-lg);
         }
 
-        .auth-btn.primary {
-            background: var(--gradient-accent);
-            border-color: transparent;
+        .nav-btn.logout {
+            background: rgba(245, 101, 101, 0.2);
+            border-color: rgba(245, 101, 101, 0.5);
         }
 
-        .auth-btn.primary:hover {
-            transform: translateY(-2px) scale(1.05);
-            box-shadow: var(--shadow-xl);
-        }
-
-        /* Profile Button */
-        .profile-btn {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            background: var(--gradient-accent);
-            color: var(--white);
-            border: 3px solid rgba(255, 255, 255, 0.3);
-            font-weight: 700;
-            font-size: 1.1rem;
-            cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            box-shadow: var(--shadow-lg);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .profile-btn::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: var(--gradient-main);
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-
-        .profile-btn:hover {
-            transform: scale(1.1);
-            box-shadow: var(--shadow-xl);
-            border-color: rgba(255, 255, 255, 0.6);
-        }
-
-        .profile-btn:hover::before {
-            opacity: 1;
-        }
-
-        .profile-btn span {
-            position: relative;
-            z-index: 2;
-        }
-
-        /* Profile Dropdown */
-        .profile-dropdown {
-            position: absolute;
-            top: 120%;
-            right: 0;
-            background: var(--white);
-            border-radius: 16px;
-            box-shadow: var(--shadow-xl);
-            padding: 0.5rem;
-            min-width: 200px;
-            opacity: 0;
-            visibility: hidden;
-            transform: translateY(-10px) scale(0.95);
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            backdrop-filter: blur(20px);
-        }
-
-        .profile-dropdown.show {
-            opacity: 1;
-            visibility: visible;
-            transform: translateY(0) scale(1);
-        }
-
-        .dropdown-item {
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-            padding: 0.75rem 1rem;
-            border-radius: 12px;
-            text-decoration: none;
-            color: var(--text-primary);
-            font-weight: 500;
-            transition: all 0.2s ease;
-            cursor: pointer;
-        }
-
-        .dropdown-item:hover {
-            background: rgba(102, 126, 234, 0.1);
-            color: var(--primary);
-            transform: translateX(4px);
-        }
-
-        .dropdown-item.logout {
-            color: var(--error);
-            border-top: 1px solid rgba(0, 0, 0, 0.1);
-            margin-top: 0.5rem;
-        }
-
-        .dropdown-item.logout:hover {
-            background: rgba(245, 101, 101, 0.1);
+        .nav-btn.logout:hover {
+            background: rgba(245, 101, 101, 0.3);
+            border-color: rgba(245, 101, 101, 0.7);
         }
 
         /* Main Content */
         main {
             position: relative;
             z-index: 10;
-            padding: 4rem 2rem 2rem;
-            max-width: 1400px;
+            padding: 4rem 2rem;
+            max-width: 900px;
             margin: 0 auto;
         }
 
-        .main-title {
+        .profile-header {
             text-align: center;
             margin-bottom: 3rem;
         }
 
-        .main-title h1 {
-            font-size: 3.5rem;
+        .profile-header h1 {
+            font-size: 3rem;
             font-weight: 800;
             color: var(--white);
-            margin-bottom: 1rem;
+            margin-bottom: 0.5rem;
             text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
         }
 
-        .main-title p {
-            font-size: 1.2rem;
+        .profile-header p {
+            font-size: 1.1rem;
             color: rgba(255, 255, 255, 0.8);
             font-weight: 400;
         }
 
-        /* Gift Card Grid */
-        .gift-card-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 2rem;
-            margin-top: 3rem;
-        }
-
-        .gift-card {
-            background: var(--white);
-            border-radius: 20px;
-            overflow: hidden;
-            box-shadow: var(--shadow-lg);
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        /* Profile Card */
+        .profile-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-radius: 24px;
+            padding: 3rem;
+            box-shadow: var(--shadow-xl);
+            border: 1px solid rgba(255, 255, 255, 0.3);
             position: relative;
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            overflow: hidden;
         }
 
-        .gift-card::before {
+        .profile-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--gradient-main);
+            opacity: 0.02;
+            pointer-events: none;
+        }
+
+        /* Profile Avatar */
+        .profile-avatar {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 2rem;
+        }
+
+        .avatar-circle {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: var(--gradient-accent);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            font-weight: 800;
+            color: var(--white);
+            box-shadow: var(--shadow-lg);
+            border: 4px solid rgba(255, 255, 255, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .avatar-circle::before {
             content: '';
             position: absolute;
             top: 0;
@@ -289,74 +220,137 @@
             background: var(--gradient-main);
             opacity: 0;
             transition: opacity 0.3s ease;
-            border-radius: 20px;
         }
 
-        .gift-card:hover {
-            transform: translateY(-10px) scale(1.02);
-            box-shadow: var(--shadow-xl);
+        .avatar-circle:hover::before {
+            opacity: 0.3;
         }
 
-        .gift-card:hover::before {
-            opacity: 0.05;
-        }
-
-        .card-image {
-            width: 100%;
-            height: 220px;
-            object-fit: cover;
+        .avatar-circle span {
             position: relative;
             z-index: 2;
         }
 
-        .card-content {
+        /* Profile Details */
+        .profile-details {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .detail-item {
+            background: rgba(102, 126, 234, 0.05);
+            border: 1px solid rgba(102, 126, 234, 0.1);
+            border-radius: 16px;
             padding: 1.5rem;
-            position: relative;
-            z-index: 2;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        .card-title {
-            font-size: 1.3rem;
-            font-weight: 700;
-            color: var(--text-primary);
+        .detail-item:hover {
+            background: rgba(102, 126, 234, 0.08);
+            border-color: rgba(102, 126, 234, 0.2);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .detail-label {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
             margin-bottom: 0.5rem;
         }
 
-        .card-price {
+        .detail-value {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            word-break: break-word;
+        }
+
+        .detail-value.email {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.1rem;
+        }
+
+        .detail-value.balance {
             font-size: 2rem;
-            font-weight: 800;
             background: var(--gradient-main);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            margin-bottom: 1rem;
         }
 
-        .buy-btn {
-            width: 100%;
-            padding: 1rem;
-            background: var(--gradient-main);
-            color: var(--white);
-            border: none;
-            border-radius: 12px;
-            font-size: 1rem;
+        .detail-value.status {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .status-badge {
+            padding: 0.25rem 0.75rem;
+            border-radius: 50px;
+            font-size: 0.8rem;
             font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            box-shadow: var(--shadow-md);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
 
-        .buy-btn:hover {
-            transform: translateY(-2px);
+        .status-badge.verified {
+            background: rgba(72, 187, 120, 0.15);
+            color: var(--success);
+        }
+
+        .status-badge.unverified {
+            background: rgba(237, 137, 54, 0.15);
+            color: var(--warning);
+        }
+
+        /* Account Stats */
+        .account-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .stat-card {
+            background: var(--gradient-main);
+            border-radius: 16px;
+            padding: 1.5rem;
+            text-align: center;
+            color: var(--white);
+            box-shadow: var(--shadow-md);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .stat-card:hover {
+            transform: translateY(-4px);
             box-shadow: var(--shadow-lg);
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            font-weight: 500;
+            opacity: 0.9;
         }
 
         /* Loading Animation */
         .loading {
             display: flex;
-            justify-content: center;
+            flex-direction: column;
             align-items: center;
+            justify-content: center;
             min-height: 300px;
+            color: var(--white);
         }
 
         .spinner {
@@ -366,10 +360,22 @@
             border-left-color: var(--white);
             border-radius: 50%;
             animation: spin 1s linear infinite;
+            margin-bottom: 1rem;
         }
 
         @keyframes spin {
             to { transform: rotate(360deg); }
+        }
+
+        /* Error State */
+        .error-message {
+            text-align: center;
+            color: var(--white);
+            padding: 2rem;
+            background: rgba(245, 101, 101, 0.1);
+            border: 1px solid rgba(245, 101, 101, 0.3);
+            border-radius: 16px;
+            margin: 2rem 0;
         }
 
         /* Responsive Design */
@@ -378,17 +384,28 @@
                 padding: 0 1rem;
             }
             
-            .main-title h1 {
+            .profile-header h1 {
                 font-size: 2.5rem;
             }
             
-            .gift-card-grid {
-                grid-template-columns: 1fr;
-                gap: 1.5rem;
+            .profile-card {
+                padding: 2rem;
+                border-radius: 16px;
+            }
+            
+            .avatar-circle {
+                width: 100px;
+                height: 100px;
+                font-size: 2.5rem;
             }
             
             main {
                 padding: 2rem 1rem;
+            }
+
+            .nav-links {
+                flex-direction: column;
+                gap: 0.5rem;
             }
         }
 
@@ -401,45 +418,87 @@
 <body>
     <header>
         <div class="header-content">
-            <a href="#" class="logo">GiftStore</a>
+            <a href="index.html" class="logo">GiftStore</a>
             
-            <div class="profile-section">
-                <!-- Auth buttons (shown when not logged in) -->
-                <div id="auth-buttons" class="auth-buttons hidden">
-                    <a href="login.html" class="auth-btn">Login</a>
-                    <a href="login.html" class="auth-btn primary">Sign Up</a>
-                </div>
-                
-                <!-- Profile button (shown when logged in) -->
-                <div id="profile-container" class="hidden">
-                    <button id="profile-btn" class="profile-btn">
-                        <span id="profile-initial">U</span>
-                    </button>
-                    <div id="profile-dropdown" class="profile-dropdown">
-                        <a href="profile.html" class="dropdown-item">
-                            <span>👤</span> Go to Account
-                        </a>
-                        <div class="dropdown-item">
-                            <span>⚙️</span> Settings
-                        </div>
-                        <div id="logout-btn" class="dropdown-item logout">
-                            <span>🚪</span> Logout
-                        </div>
-                    </div>
-                </div>
+            <div class="nav-links">
+                <a href="index.html" class="nav-btn">← Back to Store</a>
+                <button id="logout-btn" class="nav-btn logout">Logout</button>
             </div>
         </div>
     </header>
 
     <main>
-        <div class="main-title">
-            <h1>Premium Gift Cards</h1>
-            <p>Discover amazing gift cards for your loved ones</p>
+        <div class="profile-header">
+            <h1>My Profile</h1>
+            <p>Manage your account information and settings</p>
         </div>
 
-        <div id="gift-card-grid" class="gift-card-grid">
-            <div class="loading">
+        <div id="profile-content">
+            <!-- Loading state -->
+            <div id="loading-state" class="loading">
                 <div class="spinner"></div>
+                <p>Loading your profile...</p>
+            </div>
+
+            <!-- Profile card (hidden initially) -->
+            <div id="profile-card" class="profile-card hidden">
+                <div class="profile-avatar">
+                    <div class="avatar-circle">
+                        <span id="profile-initial">U</span>
+                    </div>
+                </div>
+
+                <div class="profile-details">
+                    <div class="detail-item">
+                        <div class="detail-label">Full Name</div>
+                        <div id="user-name" class="detail-value">Loading...</div>
+                    </div>
+
+                    <div class="detail-item">
+                        <div class="detail-label">Email Address</div>
+                        <div id="user-email" class="detail-value email">Loading...</div>
+                    </div>
+
+                    <div class="detail-item">
+                        <div class="detail-label">Username</div>
+                        <div id="user-username" class="detail-value">Loading...</div>
+                    </div>
+
+                    <div class="detail-item">
+                        <div class="detail-label">Account Status</div>
+                        <div id="user-verified" class="detail-value status">
+                            <span class="status-badge">Loading...</span>
+                        </div>
+                    </div>
+
+                    <div class="detail-item">
+                        <div class="detail-label">Account Balance</div>
+                        <div id="user-balance" class="detail-value balance">$0.00</div>
+                    </div>
+
+                    <div class="detail-item">
+                        <div class="detail-label">Member Since</div>
+                        <div id="user-created" class="detail-value">Loading...</div>
+                    </div>
+                </div>
+
+                <div class="account-stats">
+                    <div class="stat-card">
+                        <div class="stat-number" id="total-purchases">0</div>
+                        <div class="stat-label">Total Purchases</div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <div class="stat-number" id="account-age">0</div>
+                        <div class="stat-label">Days Active</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Error state -->
+            <div id="error-state" class="error-message hidden">
+                <h3>Unable to Load Profile</h3>
+                <p>There was an error loading your profile information. Please try refreshing the page.</p>
             </div>
         </div>
     </main>
@@ -450,110 +509,104 @@
         const pb = new PocketBase('https://pb.flashreport.rest');
 
         // DOM Elements
-        const authButtons = document.getElementById('auth-buttons');
-        const profileContainer = document.getElementById('profile-container');
-        const profileBtn = document.getElementById('profile-btn');
-        const profileDropdown = document.getElementById('profile-dropdown');
-        const profileInitial = document.getElementById('profile-initial');
         const logoutBtn = document.getElementById('logout-btn');
-        const giftCardGrid = document.getElementById('gift-card-grid');
+        const loadingState = document.getElementById('loading-state');
+        const profileCard = document.getElementById('profile-card');
+        const errorState = document.getElementById('error-state');
+        const profileInitial = document.getElementById('profile-initial');
+        const userName = document.getElementById('user-name');
+        const userEmail = document.getElementById('user-email');
+        const userUsername = document.getElementById('user-username');
+        const userVerified = document.getElementById('user-verified');
+        const userBalance = document.getElementById('user-balance');
+        const userCreated = document.getElementById('user-created');
+        const totalPurchases = document.getElementById('total-purchases');
+        const accountAge = document.getElementById('account-age');
 
-        // Check authentication status
-        function checkAuthStatus() {
-            if (pb.authStore.isValid && pb.authStore.model) {
-                // User is logged in
-                authButtons.classList.add('hidden');
-                profileContainer.classList.remove('hidden');
-                
-                // Set profile initial
-                const user = pb.authStore.model;
-                profileInitial.textContent = user.email.charAt(0).toUpperCase();
-                
-                return true;
-            } else {
-                // User is not logged in
-                authButtons.classList.remove('hidden');
-                profileContainer.classList.add('hidden');
+        // Check authentication and redirect if not logged in
+        function checkAuth() {
+            if (!pb.authStore.isValid || !pb.authStore.model) {
+                window.location.href = 'login.html';
                 return false;
             }
+            return true;
         }
 
-        // Toggle profile dropdown
-        function toggleProfileDropdown() {
-            profileDropdown.classList.toggle('show');
-        }
+        // Load user profile data
+        async function loadUserProfile() {
+            if (!checkAuth()) return;
 
-        // Close dropdown when clicking outside
-        document.addEventListener('click', (e) => {
-            if (!profileContainer.contains(e.target)) {
-                profileDropdown.classList.remove('show');
+            try {
+                // Get current user from auth store
+                const user = pb.authStore.model;
+                
+                // Try to fetch fresh user data from the database
+                let userData;
+                try {
+                    userData = await pb.collection('users').getOne(user.id);
+                } catch (error) {
+                    // If we can't fetch fresh data, use cached data
+                    userData = user;
+                }
+
+                // Update profile initial
+                profileInitial.textContent = userData.email?.charAt(0).toUpperCase() || 'U';
+
+                // Update profile details
+                userName.textContent = userData.name || userData.username || 'Not provided';
+                userEmail.textContent = userData.email || 'Not provided';
+                userUsername.textContent = userData.username || 'Not provided';
+                
+                // Update verification status
+                const verificationBadge = userVerified.querySelector('.status-badge') || 
+                                        document.createElement('span');
+                verificationBadge.className = `status-badge ${userData.verified ? 'verified' : 'unverified'}`;
+                verificationBadge.textContent = userData.verified ? 'Verified' : 'Unverified';
+                userVerified.innerHTML = '';
+                userVerified.appendChild(verificationBadge);
+
+                // Update balance
+                const balance = userData.balance || 0;
+                userBalance.textContent = `$${parseFloat(balance).toFixed(2)}`;
+
+                // Update creation date
+                const createdDate = new Date(userData.created);
+                userCreated.textContent = createdDate.toLocaleDateString('en-US', {
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric'
+                });
+
+                // Calculate account age
+                const accountAgeInDays = Math.floor((Date.now() - createdDate.getTime()) / (1000 * 60 * 60 * 24));
+                accountAge.textContent = accountAgeInDays;
+
+                // For now, set purchases to 0 (you can implement this later based on your purchase tracking)
+                totalPurchases.textContent = '0';
+
+                // Show profile card and hide loading
+                loadingState.classList.add('hidden');
+                profileCard.classList.remove('hidden');
+
+            } catch (error) {
+                console.error('Failed to load user profile:', error);
+                loadingState.classList.add('hidden');
+                errorState.classList.remove('hidden');
             }
-        });
+        }
 
         // Handle logout
         function handleLogout() {
             pb.authStore.clear();
-            window.location.href = 'login.html';
-        }
-
-        // Load gift cards
-        async function loadGiftCards() {
-            try {
-                const records = await pb.collection('content').getFullList({
-                    sort: '-created',
-                });
-
-                giftCardGrid.innerHTML = '';
-                
-                if (records.length === 0) {
-                    giftCardGrid.innerHTML = '<p style="color: white; text-align: center; grid-column: 1/-1;">No gift cards available.</p>';
-                    return;
-                }
-
-                records.forEach(card => {
-                    const cardElement = document.createElement('div');
-                    cardElement.classList.add('gift-card');
-                    
-                    const imageUrl = card.image ? pb.getFileUrl(card, card.image) : 'https://via.placeholder.com/320x220?text=Gift+Card';
-
-                    cardElement.innerHTML = `
-                        <img src="${imageUrl}" alt="${card.giftname}" class="card-image" onerror="this.src='https://via.placeholder.com/320x220/667eea/ffffff?text=Gift+Card'">
-                        <div class="card-content">
-                            <h3 class="card-title">${card.giftname}</h3>
-                            <div class="card-price">${card.price}</div>
-                            <button class="buy-btn" onclick="handlePurchase('${card.id}', '${card.giftname}', ${card.price})">Buy Now</button>
-                        </div>
-                    `;
-                    
-                    giftCardGrid.appendChild(cardElement);
-                });
-
-            } catch (error) {
-                console.error('Failed to load gift cards:', error);
-                giftCardGrid.innerHTML = '<p style="color: white; text-align: center; grid-column: 1/-1;">Failed to load gift cards.</p>';
-            }
-        }
-
-        // Handle gift card purchase
-        function handlePurchase(cardId, cardName, price) {
-            if (!pb.authStore.isValid) {
-                // Redirect to login if not authenticated
-                window.location.href = 'login.html';
-                return;
-            }
-            
-            // For now, just show an alert - you can implement actual purchase logic later
-            alert(`Purchase ${cardName} for ${price}?\n\nThis would integrate with a payment system.`);
+            window.location.href = 'index.html';
         }
 
         // Event listeners
-        profileBtn?.addEventListener('click', toggleProfileDropdown);
-        logoutBtn?.addEventListener('click', handleLogout);
+        logoutBtn.addEventListener('click', handleLogout);
 
         // Initialize
         document.addEventListener('DOMContentLoaded', () => {
-            checkAuthStatus();
-            loadGiftCards();
+            loadUserProfile();
         });
     </script>
 </body>
