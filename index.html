@@ -860,7 +860,7 @@
                         <div class="card-content">
                             <h3 class="card-title">${card.giftname || 'Gift Card'}</h3>
                             <div class="card-price">${card.price || ''}</div>
-                            <button class="buy-btn" onclick="handlePurchase('${card.id}', '${card.giftname}', '${card.price}')">Buy Now</button>
+                            <button class="buy-btn" onclick="handlePurchase('${card.id}', '${card.giftname}', '${card.price}', 'high-value')">Buy Now</button>
                         </div>
                     `;
                     highValueGrid.appendChild(cardElement);
@@ -896,7 +896,7 @@
                         <div class="card-content">
                             <h3 class="card-title">${card.giftname || 'Gift Card'}</h3>
                             <div class="card-price">${card.price || ''}</div>
-                            <button class="buy-btn" onclick="handlePurchase('${card.id}', '${card.giftname}', '${card.price}')">Buy Now</button>
+                            <button class="buy-btn" onclick="handlePurchase('${card.id}', '${card.giftname}', '${card.price}', 'content')">Buy Now</button>
                         </div>
                     `;
                     giftCardGrid.appendChild(cardElement);
@@ -909,13 +909,9 @@
         }
 
         // Handle gift card purchase
-        function handlePurchase(cardId, cardName, price) {
-            if (!pb.authStore.isValid) {
-                window.location.href = 'login.html';
-                return;
-            }
-            alert(`Purchase ${cardName} for ${price}?\n\nThis would integrate with a payment system.`);
-        }
+        function handlePurchase(cardId, cardName, price, cardType = 'content') {
+       window.location.href = `buypage.html?id=${cardId}&type=${cardType}`;
+       }
 
         // Event listeners
         profileBtn?.addEventListener('click', toggleProfileDropdown);
@@ -931,3 +927,4 @@
     </script>
 </body>
 </html>
+
