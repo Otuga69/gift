@@ -9,8 +9,7 @@
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap');
 
         :root {
-            --primary: #667eea;
-            --secondary: #764ba2;
+            --primary: #000000ff;
             --accent: #f093fb;
             --dark: #1a1a2e;
             --darker: #16213e;
@@ -21,13 +20,35 @@
             --success: #48bb78;
             --error: #f56565;
             --warning: #ed8936;
-            --shadow-sm: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
-            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-            --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-            --gradient-main: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
-            --gradient-accent: linear-gradient(135deg, var(--accent) 0%, var(--primary) 100%);
-            --gradient-dark: linear-gradient(135deg, var(--dark) 0%, var(--darker) 100%);
+
+            /* RGBA Color Variables */
+            --black-alpha-90: rgba(18, 18, 19, 0.9);
+            --black-alpha-81: rgba(0, 0, 0, 0.81);
+            --black-alpha-80: rgba(0, 0, 0, 0.8);
+            --black-alpha-10: rgba(0, 0, 0, 0.1);
+            --black-alpha-06: rgba(0, 0, 0, 0.06);
+            --black-alpha-05: rgba(0, 0, 0, 0.05);
+            --black-alpha-04: rgba(0, 0, 0, 0.04);
+
+            --white-alpha-60: rgba(255, 255, 255, 0.6);
+            --white-alpha-50: rgba(255, 255, 255, 0.5);
+            --white-alpha-30: rgba(255, 255, 255, 0.3);
+            --white-alpha-20: rgba(255, 255, 255, 0.2);
+            --white-alpha-10: rgba(255, 255, 255, 0.1);
+
+            --header-bg-translucent: rgba(255, 254, 254, 0.47);
+            --border-light-translucent: rgba(136, 135, 135, 0.2);
+            --profile-btn-bg: rgba(84, 152, 190, 0.81);
+            --text-shadow-light: rgba(252, 249, 249, 0.3);
+            --price-color: rgba(5, 155, 0, 1);
+            --dropdown-hover-bg: rgba(102, 126, 234, 0.1);
+            --error-hover-bg: rgba(245, 101, 101, 0.1);
+
+            /* Shadow Variables using RGBA variables */
+            --shadow-sm: 0 1px 3px 0 var(--black-alpha-10), 0 1px 2px 0 var(--black-alpha-06);
+            --shadow-md: 0 4px 6px -1px var(--black-alpha-10), 0 2px 4px -1px var(--black-alpha-06);
+            --shadow-lg: 0 10px 15px -3px var(--black-alpha-10), 0 4px 6px -2px var(--black-alpha-05);
+            --shadow-xl: 0 20px 25px -5px var(--black-alpha-81), 0 10px 10px -5px var(--black-alpha-04);
         }
 
         * {
@@ -38,7 +59,7 @@
 
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #fdfdfd, #e9e9e9);
             min-height: 100vh;
             color: var(--text-primary);
             overflow-x: hidden;
@@ -55,10 +76,10 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-image: 
-                radial-gradient(circle at 20% 50%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
-                radial-gradient(circle at 80% 20%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
-                radial-gradient(circle at 40% 80%, rgba(255, 255, 255, 0.1) 0%, transparent 50%);
+            background-image:
+                radial-gradient(circle at 20% 50%, var(--white-alpha-10) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, var(--white-alpha-10) 0%, transparent 50%),
+                radial-gradient(circle at 40% 80%, var(--white-alpha-10) 0%, transparent 50%);
             animation: float 20s ease-in-out infinite;
             pointer-events: none;
             z-index: 1;
@@ -75,10 +96,10 @@
             top: 0;
             left: 0;
             right: 0;
-            background: rgba(255, 255, 255, 0.1);
+            background: var(--header-bg-translucent);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            border-bottom: 1px solid var(--border-light-translucent);
             padding: 1rem 2rem;
             z-index: 100;
         }
@@ -94,9 +115,9 @@
         .logo {
             font-size: 1.8rem;
             font-weight: 800;
-            color: var(--white);
+            color: var(--black-alpha-90);
             text-decoration: none;
-            background: var(--gradient-accent);
+            background: var(--black-alpha-81);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
@@ -104,9 +125,9 @@
 
         .back-btn {
             padding: 0.6rem 1.5rem;
-            border: 2px solid rgba(255, 255, 255, 0.3);
-            background: rgba(255, 255, 255, 0.1);
-            color: var(--white);
+            border: 2px solid var(--white-alpha-30);
+            background: var(--white-alpha-10);
+            color: var(--text-primary);
             text-decoration: none;
             border-radius: 50px;
             font-weight: 600;
@@ -116,8 +137,8 @@
         }
 
         .back-btn:hover {
-            background: rgba(255, 255, 255, 0.2);
-            border-color: rgba(255, 255, 255, 0.5);
+            background: var(--white-alpha-20);
+            border-color: var(--white-alpha-50);
             transform: translateY(-2px);
             box-shadow: var(--shadow-lg);
         }
@@ -126,13 +147,11 @@
         .auth-container {
             position: relative;
             z-index: 10;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
+            background: var(--white);
             border-radius: 24px;
             padding: 3rem;
             box-shadow: var(--shadow-xl);
-            border: 1px solid rgba(255, 255, 255, 0.3);
+            border: 1px solid var(--white-alpha-20);
             width: 100%;
             max-width: 450px;
             margin: 2rem;
@@ -142,7 +161,7 @@
         .tabs {
             display: flex;
             margin-bottom: 2rem;
-            background: rgba(102, 126, 234, 0.1);
+            background: var(--black-alpha-06);
             border-radius: 16px;
             padding: 0.5rem;
             gap: 0.5rem;
@@ -163,15 +182,15 @@
         }
 
         .tabs button.active {
-            background: var(--gradient-main);
+            background: var(--black-alpha-81);
             color: var(--white);
             box-shadow: var(--shadow-md);
             transform: translateY(-1px);
         }
 
         .tabs button:hover:not(.active) {
-            background: rgba(102, 126, 234, 0.1);
-            color: var(--primary);
+            background: var(--black-alpha-05);
+            color: var(--text-primary);
         }
 
         /* Forms */
@@ -186,13 +205,9 @@
         form h2 {
             font-size: 2rem;
             font-weight: 700;
-            color: var(--text-primary);
+            color: var(--black-alpha-90);
             margin-bottom: 2rem;
             text-align: center;
-            background: var(--gradient-main);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
         }
 
         .form-group {
@@ -210,7 +225,7 @@
         .form-group input {
             width: 100%;
             padding: 1rem 1.5rem;
-            border: 2px solid rgba(102, 126, 234, 0.2);
+            border: 2px solid var(--black-alpha-10);
             border-radius: 12px;
             font-size: 1rem;
             font-family: inherit;
@@ -222,8 +237,8 @@
 
         .form-group input:focus {
             outline: none;
-            border-color: var(--primary);
-            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+            border-color: var(--black-alpha-81);
+            box-shadow: 0 0 0 3px var(--black-alpha-10);
             transform: translateY(-1px);
         }
 
@@ -235,7 +250,7 @@
         button[type="submit"] {
             width: 100%;
             padding: 1.25rem;
-            background: var(--gradient-main);
+            background: var(--black-alpha-81);
             color: var(--white);
             border: none;
             border-radius: 12px;
@@ -296,7 +311,7 @@
             display: inline-block;
             width: 16px;
             height: 16px;
-            border: 2px solid rgba(255, 255, 255, 0.3);
+            border: 2px solid var(--white-alpha-30);
             border-left-color: var(--white);
             border-radius: 50%;
             animation: spin 1s linear infinite;
