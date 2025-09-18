@@ -1,0 +1,1026 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buy Gift Card - Gift Card Store</title>
+    <style>
+        /* Import modern fonts */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap');
+
+        :root {
+            --primary: #000000ff;
+            --accent: #f093fb;
+            --dark: #1a1a2e;
+            --darker: #16213e;
+            --light: #eee;
+            --white: #ffffff;
+            --text-primary: #2d3748;
+            --text-secondary: #718096;
+            --success: #48bb78;
+            --error: #f56565;
+            --warning: #ed8936;
+            --info: #3182ce;
+
+            /* RGBA Color Variables */
+            --black-alpha-90: rgba(18, 18, 19, 0.9);
+            --black-alpha-81: rgba(0, 0, 0, 0.81);
+            --black-alpha-80: rgba(0, 0, 0, 0.8);
+            --black-alpha-10: rgba(0, 0, 0, 0.1);
+            --black-alpha-06: rgba(0, 0, 0, 0.06);
+            --black-alpha-05: rgba(0, 0, 0, 0.05);
+            --black-alpha-04: rgba(0, 0, 0, 0.04);
+
+            --white-alpha-60: rgba(255, 255, 255, 0.6);
+            --white-alpha-50: rgba(255, 255, 255, 0.5);
+            --white-alpha-30: rgba(255, 255, 255, 0.3);
+            --white-alpha-20: rgba(255, 255, 255, 0.2);
+            --white-alpha-10: rgba(255, 255, 255, 0.1);
+
+            --header-bg-translucent: rgba(255, 254, 254, 0.47);
+            --border-light-translucent: rgba(136, 135, 135, 0.2);
+            --profile-btn-bg: rgba(84, 152, 190, 0.81);
+            --text-shadow-light: rgba(252, 249, 249, 0.3);
+            --price-color: rgba(5, 155, 0, 1);
+            --dropdown-hover-bg: rgba(102, 126, 234, 0.1);
+            --error-hover-bg: rgba(245, 101, 101, 0.1);
+
+            /* Shadow Variables using RGBA variables */
+            --shadow-sm: 0 1px 3px 0 var(--black-alpha-10), 0 1px 2px 0 var(--black-alpha-06);
+            --shadow-md: 0 4px 6px -1px var(--black-alpha-10), 0 2px 4px -1px var(--black-alpha-06);
+            --shadow-lg: 0 10px 15px -3px var(--black-alpha-10), 0 4px 6px -2px var(--black-alpha-05);
+            --shadow-xl: 0 20px 25px -5px var(--black-alpha-81), 0 10px 10px -5px var(--black-alpha-04);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(135deg, #fdfdfd, #e9e9e9);
+            min-height: 100vh;
+            color: var(--text-primary);
+            overflow-x: hidden;
+        }
+
+        /* Animated background particles */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image:
+                radial-gradient(circle at 20% 50%, var(--white-alpha-10) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, var(--white-alpha-10) 0%, transparent 50%),
+                radial-gradient(circle at 40% 80%, var(--white-alpha-10) 0%, transparent 50%);
+            animation: float 20s ease-in-out infinite;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        /* Header Styles */
+        header {
+            position: relative;
+            background: var(--header-bg-translucent);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border-light-translucent);
+            padding: 1rem 2rem;
+            z-index: 100;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--black-alpha-90);
+            text-decoration: none;
+            background: var(--black-alpha-81);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .back-btn {
+            padding: 0.6rem 1.5rem;
+            border: 2px solid var(--white-alpha-30);
+            background: var(--white-alpha-10);
+            color: var(--text-primary);
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            backdrop-filter: blur(10px);
+        }
+
+        .back-btn:hover {
+            background: var(--white-alpha-20);
+            border-color: var(--white-alpha-50);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        /* Main Content */
+        main {
+            position: relative;
+            z-index: 10;
+            padding: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Loading and Error States */
+        .loading, .error-state {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 400px;
+            text-align: center;
+        }
+
+        .spinner {
+            width: 40px;
+            height: 40px;
+            border: 4px solid var(--black-alpha-20);
+            border-left-color: var(--black-alpha-81);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-bottom: 1rem;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .error-state {
+            background: rgba(245, 101, 101, 0.1);
+            border: 1px solid rgba(245, 101, 101, 0.3);
+            border-radius: 16px;
+            padding: 3rem;
+            color: var(--error);
+        }
+
+        /* Buy Page Layout */
+        .buy-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            margin-top: 2rem;
+        }
+
+        /* Card Preview Section */
+        .card-preview {
+            background: var(--white);
+            border-radius: 24px;
+            padding: 2rem;
+            box-shadow: var(--shadow-xl);
+            border: 1px solid var(--white-alpha-20);
+            height: fit-content;
+            position: sticky;
+            top: 2rem;
+        }
+
+        .card-image {
+            width: 100%;
+            max-width: 400px;
+            border-radius: 16px;
+            margin-bottom: 1.5rem;
+            box-shadow: var(--shadow-md);
+            transition: transform 0.3s ease;
+        }
+
+        .card-image:hover {
+            transform: scale(1.02);
+        }
+
+        .card-title {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--black-alpha-90);
+            margin-bottom: 1rem;
+        }
+
+        .card-base-price {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--price-color);
+            margin-bottom: 1.5rem;
+        }
+
+        /* Purchase Section */
+        .purchase-section {
+            background: var(--white);
+            border-radius: 24px;
+            padding: 2rem;
+            box-shadow: var(--shadow-xl);
+            border: 1px solid var(--white-alpha-20);
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--black-alpha-90);
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        /* Denomination Selection */
+        .denomination-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .denomination-option {
+            padding: 1rem;
+            border: 2px solid var(--black-alpha-10);
+            border-radius: 12px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            background: var(--white);
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .denomination-option:hover {
+            border-color: var(--black-alpha-30);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .denomination-option.selected {
+            border-color: var(--black-alpha-81);
+            background: var(--black-alpha-81);
+            color: var(--white);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        /* Custom Amount */
+        .custom-amount {
+            margin-bottom: 2rem;
+        }
+
+        .custom-amount label {
+            display: block;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .custom-amount input {
+            width: 100%;
+            padding: 1rem 1.5rem;
+            border: 2px solid var(--black-alpha-10);
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-family: inherit;
+            transition: all 0.3s ease;
+        }
+
+        .custom-amount input:focus {
+            outline: none;
+            border-color: var(--black-alpha-81);
+            box-shadow: 0 0 0 3px var(--black-alpha-10);
+        }
+
+        /* Quantity Selection */
+        .quantity-section {
+            margin-bottom: 2rem;
+        }
+
+        .quantity-controls {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-top: 0.5rem;
+        }
+
+        .quantity-btn {
+            width: 40px;
+            height: 40px;
+            border: 2px solid var(--black-alpha-20);
+            background: var(--white);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            font-size: 1.2rem;
+        }
+
+        .quantity-btn:hover {
+            border-color: var(--black-alpha-81);
+            background: var(--black-alpha-05);
+        }
+
+        .quantity-input {
+            width: 80px;
+            padding: 0.75rem;
+            border: 2px solid var(--black-alpha-10);
+            border-radius: 8px;
+            text-align: center;
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+
+        /* Offers Section */
+        .offers-section {
+            background: linear-gradient(135deg, rgba(72, 187, 120, 0.1), rgba(56, 178, 172, 0.1));
+            border: 1px solid rgba(72, 187, 120, 0.3);
+            border-radius: 16px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .offers-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--success);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .offer-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.75rem 0;
+            border-bottom: 1px solid rgba(72, 187, 120, 0.2);
+        }
+
+        .offer-item:last-child {
+            border-bottom: none;
+        }
+
+        .offer-text {
+            color: var(--text-primary);
+            font-weight: 500;
+        }
+
+        /* Order Summary */
+        .order-summary {
+            background: var(--black-alpha-05);
+            border-radius: 16px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.75rem 0;
+            border-bottom: 1px solid var(--black-alpha-10);
+        }
+
+        .summary-row:last-child {
+            border-bottom: none;
+            font-weight: 700;
+            font-size: 1.2rem;
+            color: var(--black-alpha-90);
+        }
+
+        .summary-label {
+            color: var(--text-secondary);
+        }
+
+        .summary-value {
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+
+        /* Purchase Button */
+        .purchase-btn {
+            width: 100%;
+            padding: 1.25rem;
+            background: var(--black-alpha-81);
+            color: var(--white);
+            border: none;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: var(--shadow-md);
+            font-family: inherit;
+        }
+
+        .purchase-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .purchase-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        /* Information Sections */
+        .info-sections {
+            grid-column: 1 / -1;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .info-card {
+            background: var(--white);
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: var(--shadow-lg);
+            border: 1px solid var(--white-alpha-20);
+        }
+
+        .info-card h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--black-alpha-90);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .info-card p, .info-card ul {
+            color: var(--text-primary);
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+
+        .info-card ul {
+            padding-left: 1.5rem;
+        }
+
+        .info-card li {
+            margin-bottom: 0.5rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 968px) {
+            .buy-container {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .card-preview {
+                position: static;
+            }
+        }
+
+        @media (max-width: 768px) {
+            main {
+                padding: 1rem;
+            }
+
+            .card-preview, .purchase-section {
+                padding: 1.5rem;
+                border-radius: 16px;
+            }
+
+            .card-title {
+                font-size: 1.5rem;
+            }
+
+            .denomination-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            .info-sections {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Utilities */
+        .hidden {
+            display: none !important;
+        }
+
+        .disabled {
+            opacity: 0.5;
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <a href="index.html" class="logo">GiftStore</a>
+            <a href="index.html" class="back-btn">← Back to Store</a>
+        </div>
+    </header>
+
+    <main>
+        <!-- Loading State -->
+        <div id="loading-state" class="loading">
+            <div class="spinner"></div>
+            <p>Loading gift card details...</p>
+        </div>
+
+        <!-- Error State -->
+        <div id="error-state" class="error-state hidden">
+            <h3>Gift Card Not Found</h3>
+            <p>Sorry, we couldn't find the gift card you're looking for.</p>
+            <a href="index.html" class="back-btn" style="margin-top: 1rem;">← Back to Store</a>
+        </div>
+
+        <!-- Buy Container -->
+        <div id="buy-container" class="buy-container hidden">
+            <!-- Card Preview -->
+            <div class="card-preview">
+                <img id="card-image" src="" alt="" class="card-image">
+                <h1 id="card-title" class="card-title">Gift Card</h1>
+                <div id="card-base-price" class="card-base-price">$0.00</div>
+            </div>
+
+            <!-- Purchase Section -->
+            <div class="purchase-section">
+                <h2 class="section-title">
+                    🛒 Purchase Details
+                </h2>
+
+                <!-- Denomination Selection -->
+                <div class="denomination-section">
+                    <label class="section-label">Select Amount:</label>
+                    <div id="denomination-grid" class="denomination-grid">
+                        <!-- Denominations will be populated here -->
+                    </div>
+                </div>
+
+                <!-- Custom Amount -->
+                <div class="custom-amount">
+                    <label for="custom-amount-input">Or enter custom amount:</label>
+                    <input type="number" id="custom-amount-input" placeholder="Enter amount..." min="1" max="1000" step="0.01">
+                </div>
+
+                <!-- Quantity -->
+                <div class="quantity-section">
+                    <label class="section-label">Quantity:</label>
+                    <div class="quantity-controls">
+                        <button class="quantity-btn" id="decrease-qty">−</button>
+                        <input type="number" id="quantity-input" class="quantity-input" value="1" min="1" max="10">
+                        <button class="quantity-btn" id="increase-qty">+</button>
+                    </div>
+                </div>
+
+                <!-- Offers Section -->
+                <div id="offers-section" class="offers-section">
+                    <div class="offers-title">
+                        🎁 Special Offers
+                    </div>
+                    <div id="offers-list">
+                        <!-- Offers will be populated here -->
+                    </div>
+                </div>
+
+                <!-- Order Summary -->
+                <div class="order-summary">
+                    <div class="summary-row">
+                        <span class="summary-label">Card Amount:</span>
+                        <span class="summary-value" id="summary-amount">$0.00</span>
+                    </div>
+                    <div class="summary-row">
+                        <span class="summary-label">Quantity:</span>
+                        <span class="summary-value" id="summary-quantity">1</span>
+                    </div>
+                    <div class="summary-row">
+                        <span class="summary-label">Subtotal:</span>
+                        <span class="summary-value" id="summary-subtotal">$0.00</span>
+                    </div>
+                    <div class="summary-row">
+                        <span class="summary-label">Discount:</span>
+                        <span class="summary-value" id="summary-discount">-$0.00</span>
+                    </div>
+                    <div class="summary-row">
+                        <span class="summary-label">Total:</span>
+                        <span class="summary-value" id="summary-total">$0.00</span>
+                    </div>
+                </div>
+
+                <!-- Purchase Button -->
+                <button id="purchase-btn" class="purchase-btn">
+                    Complete Purchase
+                </button>
+            </div>
+
+            <!-- Information Sections -->
+            <div class="info-sections">
+                <!-- Description -->
+                <div class="info-card">
+                    <h3>📋 Description</h3>
+                    <div id="card-description">
+                        <p>Loading description...</p>
+                    </div>
+                </div>
+
+                <!-- How to Redeem -->
+                <div class="info-card">
+                    <h3>🎯 How to Redeem</h3>
+                    <div id="redemption-instructions">
+                        <p>Loading redemption instructions...</p>
+                    </div>
+                </div>
+
+                <!-- Terms and Conditions -->
+                <div class="info-card">
+                    <h3>📜 Terms & Conditions</h3>
+                    <div id="terms-conditions">
+                        <p>Loading terms and conditions...</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/pocketbase@latest/dist/pocketbase.umd.js"></script>
+    <script>
+        // Initialize PocketBase
+        const pb = new PocketBase('https://pb.flashreport.rest');
+
+        // Get card ID from URL parameters
+        const urlParams = new URLSearchParams(window.location.search);
+        const cardId = urlParams.get('id');
+        const cardType = urlParams.get('type') || 'content'; // default to 'content' collection
+
+        // DOM Elements
+        const loadingState = document.getElementById('loading-state');
+        const errorState = document.getElementById('error-state');
+        const buyContainer = document.getElementById('buy-container');
+        const cardImage = document.getElementById('card-image');
+        const cardTitle = document.getElementById('card-title');
+        const cardBasePrice = document.getElementById('card-base-price');
+        const denominationGrid = document.getElementById('denomination-grid');
+        const customAmountInput = document.getElementById('custom-amount-input');
+        const quantityInput = document.getElementById('quantity-input');
+        const decreaseQtyBtn = document.getElementById('decrease-qty');
+        const increaseQtyBtn = document.getElementById('increase-qty');
+        const offersSection = document.getElementById('offers-section');
+        const offersList = document.getElementById('offers-list');
+        const purchaseBtn = document.getElementById('purchase-btn');
+
+        // Summary elements
+        const summaryAmount = document.getElementById('summary-amount');
+        const summaryQuantity = document.getElementById('summary-quantity');
+        const summarySubtotal = document.getElementById('summary-subtotal');
+        const summaryDiscount = document.getElementById('summary-discount');
+        const summaryTotal = document.getElementById('summary-total');
+
+        // Info elements
+        const cardDescription = document.getElementById('card-description');
+        const redemptionInstructions = document.getElementById('redemption-instructions');
+        const termsConditions = document.getElementById('terms-conditions');
+
+        // State variables
+        let currentCard = null;
+        let selectedAmount = 0;
+        let currentQuantity = 1;
+        let currentOffers = [];
+
+        // Default denominations
+        const defaultDenominations = [25, 50, 100, 250, 500, 1000];
+
+        // Load card data
+        async function loadCardData() {
+            if (!cardId) {
+                showError();
+                return;
+            }
+
+            try {
+                // Determine which collection to query
+                let collection = 'content';
+                if (cardType === 'high-value') {
+                    collection = 'highvalecards';
+                } else if (cardType === 'static') {
+                    collection = 'static_cards';
+                }
+
+                const record = await pb.collection(collection).getOne(cardId);
+                currentCard = record;
+                
+                displayCardData(record);
+                loadingState.classList.add('hidden');
+                buyContainer.classList.remove('hidden');
+
+            } catch (error) {
+                console.error('Failed to load card:', error);
+                showError();
+            }
+        }
+
+        // Display card data
+        function displayCardData(card) {
+            // Set card image
+            const imageUrl = card.image ? pb.getFileUrl(card, card.image) : 
+                            'https://via.placeholder.com/400x300/4a5568/ffffff?text=Gift+Card';
+            cardImage.src = imageUrl;
+            cardImage.alt = card.giftname || 'Gift Card';
+
+            // Set card title
+            cardTitle.textContent = card.giftname || 'Gift Card';
+
+            // Set base price
+            const basePrice = parseFloat(card.price?.replace(/[^0-9.]/g, '') || 0);
+            cardBasePrice.textContent = `Starting from $${basePrice.toFixed(2)}`;
+
+            // Load denominations
+            loadDenominations(card);
+
+            // Load offers
+            loadOffers(card);
+
+            // Load information sections
+            loadInformation(card);
+
+            // Set initial selected amount
+            if (basePrice > 0) {
+                selectedAmount = basePrice;
+                updateOrderSummary();
+            }
+        }
+
+        // Load denominations
+        function loadDenominations(card) {
+            denominationGrid.innerHTML = '';
+            
+            // Use custom denominations if available, otherwise use defaults
+            const denominations = card.denominations || defaultDenominations;
+            
+            denominations.forEach(amount => {
+                const option = document.createElement('div');
+                option.className = 'denomination-option';
+                option.textContent = `$${amount}`;
+                option.dataset.amount = amount;
+                
+                option.addEventListener('click', () => {
+                    selectDenomination(amount, option);
+                });
+                
+                denominationGrid.appendChild(option);
+            });
+        }
+
+        // Select denomination
+        function selectDenomination(amount, element) {
+            // Remove previous selection
+            document.querySelectorAll('.denomination-option').forEach(opt => {
+                opt.classList.remove('selected');
+            });
+            
+            // Select current option
+            element.classList.add('selected');
+            selectedAmount = amount;
+            customAmountInput.value = '';
+            
+            updateOrderSummary();
+        }
+
+        // Load offers
+        function loadOffers(card) {
+            currentOffers = [];
+            
+            // Default offers
+            const defaultOffers = [
+                '🎉 Free shipping on all digital gift cards',
+                '⚡ Instant delivery via email',
+                '💯 100% satisfaction guarantee',
+                '🔒 Secure payment processing'
+            ];
+
+            // Use card-specific offers if available
+            const offers = card.offers || card.special_offers || defaultOffers;
+            
+            offersList.innerHTML = '';
+            offers.forEach(offer => {
+                const offerItem = document.createElement('div');
+                offerItem.className = 'offer-item';
+                offerItem.innerHTML = `
+                    <span class="offer-text">${offer}</span>
+                `;
+                offersList.appendChild(offerItem);
+            });
+
+            // Add quantity-based offers
+            if (currentQuantity >= 5) {
+                currentOffers.push({ type: 'bulk', discount: 0.05, text: '5% bulk discount' });
+            }
+        }
+
+        // Load information sections
+        function loadInformation(card) {
+            // Description
+            cardDescription.innerHTML = card.description || 
+                `<p>Experience the convenience and flexibility of our ${card.giftname || 'gift card'}. Perfect for any occasion, this digital gift card provides instant access to a world of possibilities.</p>`;
+
+            // Redemption instructions
+            redemptionInstructions.innerHTML = card.redemption_instructions || card.how_to_redeem || `
+                <ul>
+                    <li>You will receive your gift card code via email within minutes of purchase</li>
+                    <li>Visit the retailer's website or store location</li>
+                    <li>Enter the gift card code during checkout</li>
+                    <li>The card value will be applied to your purchase</li>
+                    <li>Keep your gift card code safe and secure</li>
+                </ul>
+            `;
+
+            // Terms and conditions
+            termsConditions.innerHTML = card.terms_conditions || card.terms || `
+                <ul>
+                    <li>Gift cards are non-refundable and cannot be exchanged for cash</li>
+                    <li>Gift cards do not expire</li>
+                    <li>Treat gift cards like cash - protect your card information</li>
+                    <li>Lost or stolen cards cannot be replaced</li>
+                    <li>Gift cards can be used for multiple purchases until the balance is depleted</li>
+                    <li>Gift cards cannot be used to purchase other gift cards</li>
+                    <li>Standard terms and conditions apply</li>
+                </ul>
+            `;
+        }
+
+        // Update order summary
+        function updateOrderSummary() {
+            const amount = selectedAmount || 0;
+            const quantity = currentQuantity || 1;
+            const subtotal = amount * quantity;
+            
+            // Calculate discount
+            let totalDiscount = 0;
+            currentOffers.forEach(offer => {
+                if (offer.type === 'bulk') {
+                    totalDiscount += subtotal * offer.discount;
+                }
+            });
+            
+            const total = subtotal - totalDiscount;
+            
+            // Update summary display
+            summaryAmount.textContent = `${amount.toFixed(2)}`;
+            summaryQuantity.textContent = quantity.toString();
+            summarySubtotal.textContent = `${subtotal.toFixed(2)}`;
+            summaryDiscount.textContent = `-${totalDiscount.toFixed(2)}`;
+            summaryTotal.textContent = `${total.toFixed(2)}`;
+            
+            // Enable/disable purchase button
+            purchaseBtn.disabled = amount <= 0;
+        }
+
+        // Show error state
+        function showError() {
+            loadingState.classList.add('hidden');
+            errorState.classList.remove('hidden');
+        }
+
+        // Handle custom amount input
+        customAmountInput.addEventListener('input', (e) => {
+            const amount = parseFloat(e.target.value) || 0;
+            if (amount > 0) {
+                // Clear denomination selection
+                document.querySelectorAll('.denomination-option').forEach(opt => {
+                    opt.classList.remove('selected');
+                });
+                selectedAmount = amount;
+                updateOrderSummary();
+            }
+        });
+
+        // Quantity controls
+        decreaseQtyBtn.addEventListener('click', () => {
+            if (currentQuantity > 1) {
+                currentQuantity--;
+                quantityInput.value = currentQuantity;
+                loadOffers(currentCard); // Reload offers for quantity changes
+                updateOrderSummary();
+            }
+        });
+
+        increaseQtyBtn.addEventListener('click', () => {
+            if (currentQuantity < 10) {
+                currentQuantity++;
+                quantityInput.value = currentQuantity;
+                loadOffers(currentCard); // Reload offers for quantity changes
+                updateOrderSummary();
+            }
+        });
+
+        quantityInput.addEventListener('change', (e) => {
+            const quantity = parseInt(e.target.value) || 1;
+            if (quantity >= 1 && quantity <= 10) {
+                currentQuantity = quantity;
+                loadOffers(currentCard); // Reload offers for quantity changes
+                updateOrderSummary();
+            } else {
+                e.target.value = currentQuantity;
+            }
+        });
+
+        // Purchase button handler
+        purchaseBtn.addEventListener('click', async () => {
+            // Check if user is authenticated
+            if (!pb.authStore.isValid) {
+                alert('Please log in to purchase gift cards.');
+                window.location.href = 'login.html';
+                return;
+            }
+
+            const amount = selectedAmount || 0;
+            const quantity = currentQuantity || 1;
+            const subtotal = amount * quantity;
+            
+            let totalDiscount = 0;
+            currentOffers.forEach(offer => {
+                if (offer.type === 'bulk') {
+                    totalDiscount += subtotal * offer.discount;
+                }
+            });
+            
+            const total = subtotal - totalDiscount;
+
+            // Show confirmation dialog
+            const confirmMessage = `
+Purchase Summary:
+• Gift Card: ${currentCard.giftname}
+• Amount: ${amount.toFixed(2)}
+• Quantity: ${quantity}
+• Total: ${total.toFixed(2)}
+
+This would integrate with a payment processor.
+Continue with purchase?`;
+
+            if (confirm(confirmMessage)) {
+                // Disable button and show processing
+                purchaseBtn.disabled = true;
+                purchaseBtn.innerHTML = '<span class="loading-spinner"></span>Processing...';
+
+                try {
+                    // Here you would integrate with your payment processor
+                    // For now, we'll simulate a purchase
+                    await simulatePurchase({
+                        cardId: currentCard.id,
+                        cardName: currentCard.giftname,
+                        amount: amount,
+                        quantity: quantity,
+                        total: total,
+                        userId: pb.authStore.model.id
+                    });
+
+                    alert('Purchase successful! You will receive your gift card codes via email shortly.');
+                    
+                    // Redirect to profile or success page
+                    window.location.href = 'profile.html';
+
+                } catch (error) {
+                    console.error('Purchase failed:', error);
+                    alert('Purchase failed. Please try again.');
+                } finally {
+                    purchaseBtn.disabled = false;
+                    purchaseBtn.innerHTML = 'Complete Purchase';
+                }
+            }
+        });
+
+        // Simulate purchase (replace with actual payment integration)
+        async function simulatePurchase(purchaseData) {
+            return new Promise(resolve => {
+                setTimeout(() => {
+                    console.log('Simulated purchase:', purchaseData);
+                    resolve();
+                }, 2000);
+            });
+        }
+
+        // Initialize page
+        document.addEventListener('DOMContentLoaded', () => {
+            loadCardData();
+        });
+    </script>
+</body>
+</html>
