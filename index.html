@@ -116,6 +116,13 @@
             -webkit-text-fill-color: transparent;
             background-clip: text;
         }
+        
+        .search-bar {
+            width: 300px;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+        }
 
         /* Profile Section */
         .profile-section {
@@ -615,6 +622,7 @@
     <header>
         <div class="header-content">
             <a href="#" class="logo">GiftStore</a>
+            <input type="text" id="search-bar" class="search-bar" placeholder="Search for gift cards...">
 
             <div class="profile-section">
                 <div id="auth-buttons" class="auth-buttons hidden">
@@ -627,6 +635,9 @@
                         <span id="profile-initial">U</span>
                     </button>
                     <div id="profile-dropdown" class="profile-dropdown">
+                        <div class="dropdown-item">
+                            <span>💳</span> Wallet: <span id="wallet-balance">$0.00</span>
+                        </div>
                         <a href="profile.html" class="dropdown-item">
                             <span>👤</span> Go to Account
                         </a>
@@ -687,6 +698,9 @@
         const logoutBtn = document.getElementById('logout-btn');
         const highValueGrid = document.getElementById('high-value-grid');
         const giftCardGrid = document.getElementById('gift-card-grid');
+        const searchBar = document.getElementById('search-bar');
+        const walletBalance = document.getElementById('wallet-balance');
+
 
         // --- Slider Variables ---
         let slideInterval;
@@ -746,12 +760,21 @@
         }
 
         // Check authentication status
-        function checkAuthStatus() {
+        async function checkAuthStatus() {
             if (pb.authStore.isValid && pb.authStore.model) {
                 authButtons.classList.add('hidden');
                 profileContainer.classList.remove('hidden');
                 const user = pb.authStore.model;
                 profileInitial.textContent = user.email.charAt(0).toUpperCase();
+
+                // Fetch and display wallet balance
+                try {
+                    const userData = await pb.collection('users').getOne(user.id);
+                    walletBalance.textContent = `$${userData.balance.toFixed(2)}`;
+                } catch (error) {
+                    console.error('Failed to fetch user data:', error);
+                }
+
                 return true;
             } else {
                 authButtons.classList.remove('hidden');
@@ -759,6 +782,7 @@
                 return false;
             }
         }
+
 
         // Toggle profile dropdown
         function toggleProfileDropdown() {
@@ -835,10 +859,13 @@
         }
         
         // Load High Value cards
-        async function loadHighValueCards() {
+        async function loadHighValueCards(filter = '') {
             if (!highValueGrid) return;
             try {
-                const records = await pb.collection('highvalecards').getFullList({ sort: '-created' });
+                const records = await pb.collection('highvalecards').getFullList({ 
+                    sort: '-created',
+                    filter: `giftname ~ "${filter}"`
+                });
 
                 highValueGrid.innerHTML = '';
                 const titleElement = highValueGrid.previousElementSibling;
@@ -850,6 +877,10 @@
                     highValueGrid.style.display = 'none';
                     return;
                 }
+                 if (titleElement && titleElement.classList.contains('section-title')) {
+                        titleElement.style.display = 'block';
+                    }
+                highValueGrid.style.display = 'grid';
 
                 records.forEach(card => {
                     const cardElement = document.createElement('div');
@@ -872,9 +903,12 @@
         }
 
         // Load regular gift cards
-        async function loadGiftCards() {
+        async function loadGiftCards(filter = '') {
             try {
-                const records = await pb.collection('content').getFullList({ sort: '-created' });
+                const records = await pb.collection('content').getFullList({ 
+                    sort: '-created',
+                    filter: `giftname ~ "${filter}"` 
+                });
 
                 giftCardGrid.innerHTML = '';
                 const titleElement = giftCardGrid.previousElementSibling;
@@ -886,6 +920,9 @@
                     giftCardGrid.innerHTML = '<p style="color: var(--text-secondary); text-align: center; grid-column: 1/-1;">No gift cards available.</p>';
                     return;
                 }
+                 if (titleElement && titleElement.classList.contains('section-title')) {
+                        titleElement.style.display = 'block';
+                    }
 
                 records.forEach(card => {
                     const cardElement = document.createElement('div');
@@ -912,6 +949,14 @@
         function handlePurchase(cardId, cardName, price, cardType = 'content') {
        window.location.href = `buypage.html?id=${cardId}&type=${cardType}`;
        }
+       
+       // Search functionality
+        searchBar.addEventListener('input', (e) => {
+            const searchTerm = e.target.value;
+            loadHighValueCards(searchTerm);
+            loadGiftCards(searchTerm);
+        });
+
 
         // Event listeners
         profileBtn?.addEventListener('click', toggleProfileDropdown);
@@ -927,4 +972,3 @@
     </script>
 </body>
 </html>
-
